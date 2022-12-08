@@ -1,0 +1,53 @@
+[
+    {
+        "Name": "Japan",
+        "Coordinates": {
+            "X": -14,
+            "Y": 8
+        },
+        "ForecastedWeather": "Foggy",
+        "InitialPayload": 6295
+    },
+    {
+        "Name": "China",
+        "Coordinates": {
+            "X": -10,
+            "Y": 19
+        },
+        "InitialPayload": 3756
+    },
+    {
+        "Name": "United Kingdom",
+        "Coordinates": {
+            "X": -12,
+            "Y": 11
+        },
+        "InitialPayload": 7452
+    },
+    {
+        "Name": "USA",
+        "Coordinates": {
+            "X": 6,
+            "Y": 3
+        },
+        "InitialPayload": 4851
+    },
+    {
+        "Name": "Germany",
+        "Coordinates": {
+            "X": 11,
+            "Y": 19
+        },
+        "ForecastedWeather": "Foggy",
+        "InitialPayload": 4658
+    },
+    {
+        "Name": "France",
+        "Coordinates": {
+            "X": 20,
+            "Y": 20
+        },
+        "ForecastedWeather": "Foggy",
+        "InitialPayload": 4214
+    }
+]

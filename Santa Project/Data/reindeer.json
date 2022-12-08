@@ -1,0 +1,23 @@
+[
+    {
+        "Name": "Dasher",
+        "Capacity": 3200,
+        "Range": 30
+    },
+    {
+        "Name": "Rudolph",
+        "Capacity": 2000,
+        "Range": 40,
+        "ShinyNose": true
+    },
+    {
+        "Name": "Blitzen",
+        "Capacity": 4800,
+        "Range": 15
+    },
+    {
+        "Name": "Donna",
+        "Capacity": 3000,
+        "Range": 25
+    }
+]
