@@ -8,6 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\GiftPayload.cs" />
+    <Compile Remove="Controllers\Raindeer.cs" />
+    <Compile Remove="Controllers\Reindeer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\Gift" />
+    <None Remove="Controllers\NewFile.txt" />
+    <None Remove="Controllers\Reindeer.Controllercs" />
+    <None Remove="Data\Country\Implementation\JsonCountryRepository" />
+    <None Remove="Data\Country\Implementation\NewFile.txt" />
+    <None Remove="Data\Country\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
