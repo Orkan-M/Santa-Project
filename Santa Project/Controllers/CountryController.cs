@@ -7,21 +7,17 @@ namespace Santa_Project.Controllers
     [ApiController]
     public class CountryController : ControllerBase
     {
-        private static List<CountryModel> _country = new List<CountryModel>
-            {
-                new CountryModel
-                {
-                    Id = "1",
-                    
-                    
+        private readonly IJsonCountryRepsoitory _coutryRepository;
+        public CountryController(IJsonCountryRepsitory countryRepository)
+        {
+            _coutryRepository = countryRepository;
+        }
 
-                }
-            }
-
-        [HttpGet()]
+        [HttpGet("{id}")]
         public async Task<ActionResult<List<CountryModel>>> GetAllCountries()
         {
-            return Ok()
+            var country = _
+            return Ok();
         }
 
         [HttpDelete]
