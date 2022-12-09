@@ -1,8 +1,9 @@
-﻿using Santa_Project.Data;
+﻿using System.Data.Common;
 using Santa_Project.Data.Country;
 using Santa_Project.Models;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Xml.XPath;
+using static Santa_Project.Models.CountryModel;
 
 namespace Santa_Project.Data
 {
@@ -18,9 +19,10 @@ namespace Santa_Project.Data
 
         public virtual IEnumerable<CountryModel> LoadJson()
         {
-            const string fileName = @"C:\Users\OrkanMustafa\Source\Repos\Orkssss\Santa-Project\Santa Project\Data\countries.json";
+            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
             var jsonString = File.ReadAllText(fileName);
-            var allCountries = JsonSerializer.Deserialize<CountryModel[]>(jsonString, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+            var allCountries = JsonSerializer.Deserialize<CountryModel[]>(jsonString);
             return allCountries;
         }
 
@@ -38,14 +40,13 @@ namespace Santa_Project.Data
 
 
         public void AddCountry(CountryModel country)
-        {
+        { 
             var newCountry = new CountryModel
             {
                 Name = country.Name,
-                XCoordinate = country.XCoordinate,
-                YCoordinate = country.YCoordinate,
                 ForecastedWeather = country.ForecastedWeather,
-                InitialPayload = country.InitialPayload
+                InitialPayload = country.InitialPayload,
+                //Coordinates = country.Coordinates 
             };
             
         }
