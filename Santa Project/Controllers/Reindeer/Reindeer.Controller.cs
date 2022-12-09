@@ -2,7 +2,7 @@
 using Santa_Project.Data.Country;
 using Santa_Project.Models;
 
-namespace Santa_Project.Controllers
+namespace Santa_Project.Controllers.Reindeer
 {
     //[Route("[controller]")]
     //[ApiController]

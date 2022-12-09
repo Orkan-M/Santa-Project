@@ -3,6 +3,7 @@ using Santa_Project.Data.Country;
 using Santa_Project.Models;
 using System.Text.Json;
 using System.Xml.XPath;
+using System.Linq;
 using static Santa_Project.Models.CountryModel;
 
 namespace Santa_Project.Data
@@ -10,20 +11,33 @@ namespace Santa_Project.Data
 
     public class JsonCountryRepository : IJsonCountryRepository
     {
-        private readonly IEnumerable<CountryModel> _countries;
+        private readonly List<CountryModel> _countries;
 
         public JsonCountryRepository()
         {
             _countries = LoadJson();
         }
-
-        public virtual IEnumerable<CountryModel> LoadJson()
+        
+        
+        public virtual List<CountryModel> LoadJson()
         {
             const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
+            //const string fileName = @"..\Santa-Project\Santa Project\Data\countries.json";
+            
             var jsonString = File.ReadAllText(fileName);
 
-            var allCountries = JsonSerializer.Deserialize<CountryModel[]>(jsonString);
+            var allCountries = JsonSerializer.Deserialize<List<CountryModel>>(jsonString);
             return allCountries;
+        }
+
+        public void WriteJson()
+        {
+            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
+
+            string countrySerialize= JsonSerializer.Serialize(_countries);
+
+            var jsonString = File.WriteAllText(fileName, countrySerialize);
+
         }
 
 
@@ -33,21 +47,33 @@ namespace Santa_Project.Data
             {
                 throw new ArgumentNullException(nameof(name));
             }
-
             return _countries.FirstOrDefault(c => c.Name.Equals(name));
         }
 
 
 
-        public void AddCountry(CountryModel country)
-        { 
-            var newCountry = new CountryModel
+        public CountryModel AddCountry(CountryModel country)
+        {
+            var incomingCountry = _countries.Where(c => c.Name.Equals(country.Name));
+            if (incomingCountry.Any() == false)
             {
-                Name = country.Name,
-                ForecastedWeather = country.ForecastedWeather,
-                InitialPayload = country.InitialPayload,
-                //Coordinates = country.Coordinates 
-            };
+                var newCountry = new CountryModel
+                {
+                    Name = country.Name,
+                    ForecastedWeather = country.ForecastedWeather,
+                    InitialPayload = country.InitialPayload,
+                    Coordinates = country.Coordinates
+                };
+                _countries.Add(newCountry);
+
+                return newCountry;
+                //write to file
+            }
+            else
+            {
+                throw new ArgumentException("Invalid country");
+            }
+            
             
         }
        

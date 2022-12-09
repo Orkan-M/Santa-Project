@@ -2,7 +2,7 @@
 using Santa_Project.Models;
 using Santa_Project.Data.Country;
 
-namespace Santa_Project.Controllers
+namespace Santa_Project.Controllers.Country
 {
     [Route("[controller]")]
     [ApiController]
@@ -21,11 +21,19 @@ namespace Santa_Project.Controllers
             return Ok(country);
         }
 
-        //[HttpDelete]
-        //[Route("{Id}")]
-        //public async Task<ActionResult<CountryModel> RemoveCountry(string Id) {
-        //    return Ok();
-        //}
-           
+        [HttpPost]
+        public IActionResult NewCountry(CountryModel newCountry)
+        {
+            var country = _countryRepository.AddCountry(newCountry);
+            return Ok(country);
+        }
+
+       // [HttpDelete]
+       // [Route("{Id}")]
+        //    public async Task<ActionResult<CountryModel> RemoveCountry(string Id) 
+        //    {
+       ////     return Ok();
+      //  }
+
     }
 }

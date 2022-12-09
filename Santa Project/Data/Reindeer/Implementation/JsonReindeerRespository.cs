@@ -16,7 +16,7 @@ namespace Santa_Project.Data
 
     //    public virtual IEnumerable<ReindeerModel> LoadJson()
     //    {
-    //        const string fileName = @"../Santa Project/Data/reindeer.json";
+    //        const string fileName = @"/Santa Project/Data/reindeer.json";
     //        var jsonString = File.ReadAllText(fileName);
     //        var allCountries = JsonSerializer.Deserialize<ReindeerModel[]>(jsonString, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
     //        return allCountries;

@@ -8,7 +8,9 @@ namespace Santa_Project.Data.Country
 
         public CountryModel GetCountryByName(string name);
 
-        public IEnumerable<CountryModel> LoadJson();
+        public CountryModel AddCountry(CountryModel country);
+
+        public List<CountryModel> LoadJson();
 
 
     }
