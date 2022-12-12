@@ -28,12 +28,13 @@ namespace Santa_Project.Controllers.Country
             return Ok(country);
         }
 
-       // [HttpDelete]
-       // [Route("{Id}")]
-        //    public async Task<ActionResult<CountryModel> RemoveCountry(string Id) 
-        //    {
-       ////     return Ok();
-      //  }
+        [HttpDelete]
+        [Route("{name}")]
+        public async Task<ActionResult<CountryModel>> RemoveCountry(string name)
+        { 
+            _countryRepository.DeleteByName(name);
+            return Ok();
+        }
 
     }
 }
