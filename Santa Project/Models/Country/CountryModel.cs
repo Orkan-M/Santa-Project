@@ -7,7 +7,7 @@ namespace Santa_Project.Models
     {
         public string Name { get; set; }
         public string ForecastedWeather { get; set; }
-        public int InitialPayload { get; set; }
+        public uint InitialPayload { get; set; }
         public Coordinates Coordinates { get; set; }
 
     }
