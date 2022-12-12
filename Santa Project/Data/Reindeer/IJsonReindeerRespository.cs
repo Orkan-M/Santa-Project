@@ -2,10 +2,14 @@
 
 namespace Santa_Project.Data.Reindeer
 {
-    public interface IJsonReindeerRespository
+    public interface IJsonReindeerRepository
     {
         public ReindeerModel GetReindeerByName(string name);
 
-        public IEnumerable<ReindeerModel> LoadJson();
+        public List<ReindeerModel> LoadJson();
+
+        public ReindeerModel AddReindeer (ReindeerModel reindeer);
+        public void RemoveReindeer (ReindeerModel reindeer);
+        public ReindeerModel EditReindeer (ReindeerModel reindeer);
     }
 }

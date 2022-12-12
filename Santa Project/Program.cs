@@ -1,4 +1,4 @@
-using Santa_Project.IOC;
+using Santa_Project.IOC.Country;
 
 var builder = WebApplication.CreateBuilder(args);
 
