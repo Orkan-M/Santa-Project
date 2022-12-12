@@ -102,7 +102,7 @@ namespace Santa_Project.Data
             File.WriteAllText(fileName, jsonString);
         }
 
-        public int GetCountryPayload(string name)
+        public uint GetCountryPayload(string name)
         {
             if (name == null)
             {
@@ -111,7 +111,22 @@ namespace Santa_Project.Data
 
             var country = _countries.Find(c => c.Name.Equals(name));
 
-            return country.InitialPayload;
+            //Casted to Uint
+            return (uint)country.InitialPayload;
+        }
+
+        public CountryModel UpdatePayload(string name, uint payload)
+        {
+            if (name == null || payload == null)
+            {
+                throw new ArgumentException(nameof(name));
+            }
+
+            var country = _countries.Find(c => c.Name.Equals(name));
+
+            country.InitialPayload = payload;
+
+            return country;
         }
     }
 }
