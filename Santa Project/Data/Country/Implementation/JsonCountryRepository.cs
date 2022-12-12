@@ -34,9 +34,11 @@ namespace Santa_Project.Data
         {
             const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
 
-            string countrySerialize= JsonSerializer.Serialize(_countries);
+            var options = new JsonSerializerOptions { WriteIndented = true };
 
-            var jsonString = File.WriteAllText(fileName, countrySerialize);
+            string countrySerialize= JsonSerializer.Serialize(_countries, options);
+
+            File.WriteAllText(fileName, countrySerialize);
 
         }
 
@@ -54,7 +56,9 @@ namespace Santa_Project.Data
 
         public CountryModel AddCountry(CountryModel country)
         {
-            var incomingCountry = _countries.Where(c => c.Name.Equals(country.Name));
+            var incomingCountry = _countries.Where(c => c.Name.Equals(country.Name) && c.Coordinates.X.Equals(country.Coordinates.X)
+                && c.Coordinates.Y.Equals(country.Coordinates.Y));
+          
             if (incomingCountry.Any() == false)
             {
                 var newCountry = new CountryModel
@@ -65,7 +69,7 @@ namespace Santa_Project.Data
                     Coordinates = country.Coordinates
                 };
                 _countries.Add(newCountry);
-
+                WriteJson();
                 return newCountry;
                 //write to file
             }
@@ -81,7 +85,7 @@ namespace Santa_Project.Data
         {
             // remove from list
             var countryToRemove = _countries.Where(c => c.Name.Equals(country.Name)).First();
-            _countries.ToList().Remove(countryToRemove);
+            _countries.Remove(countryToRemove);
 
             // remove from json file
             const string fileName = @"../Santa Project/Data/countries.json";
