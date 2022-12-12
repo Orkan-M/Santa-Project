@@ -9,7 +9,7 @@ namespace Santa_Project.Data.Reindeer
         public List<ReindeerModel> LoadJson();
 
         public ReindeerModel AddReindeer (ReindeerModel reindeer);
-        public void RemoveReindeer (ReindeerModel reindeer);
+        public void RemoveReindeer (string reindeerName);
         public ReindeerModel EditReindeer (ReindeerModel reindeer);
     }
 }

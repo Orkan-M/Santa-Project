@@ -1,4 +1,5 @@
 using Santa_Project.IOC.Country;
+using Santa_Project.IOC.Reindeer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen()
-    .AddCountryServices();
+    .AddCountryServices()
+    .AddReindeerServices();
 
 var app = builder.Build();
 

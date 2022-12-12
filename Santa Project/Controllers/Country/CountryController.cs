@@ -37,6 +37,7 @@ namespace Santa_Project.Controllers.Country
         }
 
         [HttpGet]
+        [Route("GetPayload/{name}")]
         public async Task<ActionResult<CountryModel>> GetCountryPayload(string name)
         {
             var countryResults = _countryRepository.GetCountryPayload(name);
