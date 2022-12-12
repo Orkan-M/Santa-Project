@@ -126,6 +126,8 @@ namespace Santa_Project.Data
 
             country.InitialPayload = payload;
 
+            //Call the method to write to the JSON file.
+            WriteJson();
             return country;
         }
     }
