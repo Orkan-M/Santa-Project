@@ -13,9 +13,7 @@ namespace Santa_Project.Data.Country
         public List<CountryModel> LoadJson();
 
         public void DeleteByName(string name);
-
-
-
+        public int GetCountryPayload(string name);
     }
 
 

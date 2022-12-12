@@ -23,8 +23,8 @@ namespace Santa_Project.Data
 
         public virtual List<CountryModel> LoadJson()
         {
-            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
-            //const string fileName = @"..\Santa-Project\Santa Project\Data\countries.json";
+            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
+            const string fileName = @"..\Santa Project\Data\countries.json";
 
             var jsonString = File.ReadAllText(fileName);
 
@@ -101,6 +101,18 @@ namespace Santa_Project.Data
             const string fileName = @"../Santa Project/Data/countries.json";
             string jsonString = JsonSerializer.Serialize(_countries, options);
             File.WriteAllText(fileName, jsonString);
+        }
+
+        public int GetCountryPayload(string name)
+        {
+            if (name == null)
+            {
+                throw new ArgumentException(nameof(name));
+            }
+
+            var country = _countries.Where(c => c.Name.Equals(name)).First();
+
+            return country.InitialPayload;
         }
     }
 }

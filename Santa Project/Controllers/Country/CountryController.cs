@@ -36,5 +36,14 @@ namespace Santa_Project.Controllers.Country
             return Ok();
         }
 
+        [HttpGet]
+        public async Task<ActionResult<CountryModel>> GetCountryPayload(string name)
+        {
+            var countryResults = _countryRepository.GetCountryPayload(name);
+            
+            //"Payload of the country," + name + ", is: " + countryResults
+            return Ok(countryResults);
+        }
+
     }
 }
