@@ -1,67 +1,101 @@
 ﻿// using Santa_Project.Data;
 using Santa_Project.Models;
 using System.Text.Json;
+using Santa_Project.Models.Reindeer;
 
-namespace Santa_Project.Data
+namespace Santa_Project.Data.Reindeer
 {
+    public class JsonReindeerRepository : IJsonReindeerRepository
+    {
+        private readonly List<ReindeerModel> _reindeer;
 
-    //public class JsonReindeerRepository : IJsonReindeerRepository
-    //{
-    //    private readonly IEnumerable<ReindeerModel> _reindeer;
+        public JsonReindeerRepository()
+        {
+            _reindeer = LoadJson();
+        }
 
-    //    public JsonReindeerRepository()
-    //    {
-    //        _reindeer = LoadJson();
-    //    }
 
-    //    public virtual IEnumerable<ReindeerModel> LoadJson()
-    //    {
-    //        const string fileName = @"/Santa Project/Data/reindeer.json";
-    //        var jsonString = File.ReadAllText(fileName);
-    //        var allCountries = JsonSerializer.Deserialize<ReindeerModel[]>(jsonString, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-    //        return allCountries;
-    //    }
+        public virtual List<ReindeerModel> LoadJson()
+        {
+            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
+            //const string fileName = @"..\Santa-Project\Santa Project\Data\countries.json";
 
-    //    public ReindeerModel GetReindeerByName(String name)
-    //    {
-    //        if (name == null)
-    //        {
-    //            throw new ArgumentNullException(nameof(name));
-    //        }
+            var jsonString = File.ReadAllText(fileName);
 
-    //        return _reindeer.FirstOrDefault(r => r.Name.Equals(name));
-    //    }
+            var allReindeer = JsonSerializer.Deserialize<List<ReindeerModel>>(jsonString);
+            return allReindeer;
+        }
 
-    //    public void AddReindeer(ReindeerModel reindeer)
-    //    {
-    //        var newReindeer = new ReindeerModel
-    //        {
-    //            Name = reindeer.Name,
-    //            Capacity = reindeer.Capacity,
-    //            Range = reindeer.Range,
-    //            ShinyNose = reindeer.ShinyNose ?? false,
-    //        };
-    //    }
+        public void WriteJson()
+        {
+            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
 
-    //    public void RemoveReindeer(ReindeerModel reindeer)
-    //    {
-    //        var reindeerToRemove = _reindeer.Where(r => r.Name.Equals(reindeer.Name)).ToList();
-    //        _reindeer.Remove(reindeerToRemove);
-    //    }
+            var options = new JsonSerializerOptions { WriteIndented = true };
 
-    //    public void EditReindeer(ReindeerModel reindeer)
-    //    {
-    //        var reindeerToEdit = _reindeer.Where(r => r.Id == reindeer.Id).ToList();
-    //        _reindeer.Find(r => r.Name == reindeer.Name).Name == reindeer.Name
-    //        var reindeerID = reindeer.Id;
-    //        var editedReindeer = new ReindeerModel
-    //        {
-    //            Id = reindeerID,
-    //            Name = reindeer.Name,
-    //            Capacity = reindeer.Capacity,
-    //            Range = reindeer.Range,
-    //            ShinyNose = reindeer.ShinyNose,
-    //        };
-    //    }
-    //}
+            string countrySerialize = JsonSerializer.Serialize(_reindeer, options);
+
+            File.WriteAllText(fileName, countrySerialize);
+        }
+
+
+        public ReindeerModel GetReindeerByName(string name)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            return _reindeer.FirstOrDefault(r => r.Name.Equals(name));
+        }
+
+
+
+        public ReindeerModel AddReindeer(ReindeerModel reindeer)
+        {
+            var incomingReindeer = _reindeer.Find(r => r.Name == reindeer.Name);
+
+            if (incomingReindeer == null)
+            {
+                var newReindeer = new ReindeerModel
+                {
+                    Name = reindeer.Name,
+                    Capacity = reindeer.Capacity,
+                    Range = reindeer.Range,
+                    ShinyNose = reindeer.ShinyNose
+                };
+                _reindeer.Add(newReindeer);
+                WriteJson();
+                return newReindeer;
+            }
+
+            throw new ArgumentException(nameof(reindeer), "A Reindeer with that name already exists");
+        }
+
+        public void RemoveReindeer(string reindeerName)
+        {
+            // remove from list
+            var reindeerToRemove = _reindeer.Find(r => r.Name.Equals(reindeerName));
+            _reindeer.Remove(reindeerToRemove);
+
+            WriteJson();
+        }
+
+        public ReindeerModel EditReindeer(ReindeerModel reindeer)
+        {
+            var reindeerToEdit = _reindeer.Find(r => r.Name == reindeer.Name);
+
+            if (reindeerToEdit != null)
+            {
+                reindeerToEdit.Name = reindeer.Name;
+                reindeerToEdit.Capacity = reindeer.Capacity;
+                reindeerToEdit.ShinyNose = reindeer.ShinyNose;
+                reindeerToEdit.Range = reindeer.Range;
+
+                WriteJson();
+                return reindeerToEdit;
+            }
+
+            throw new ArgumentException(nameof(reindeer), "Could not find the given Reindeer to edit");
+        }
+    }
+
 }

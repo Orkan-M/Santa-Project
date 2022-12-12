@@ -1,7 +1,7 @@
 ﻿using Santa_Project.Data;
 using Santa_Project.Data.Country;
 
-namespace Santa_Project.IOC
+namespace Santa_Project.IOC.Country
 
 {
     public static class ServiceExtensions
