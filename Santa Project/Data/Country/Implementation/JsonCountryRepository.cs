@@ -59,11 +59,11 @@ namespace Santa_Project.Data
 
         public CountryModel AddCountry(CountryModel country)
         {
-            var incomingCountry = _countries.Where(c => c.Name.Equals(country.Name) &&
+            var incomingCountry = _countries.Find(c => c.Name.Equals(country.Name) &&
                                                         c.Coordinates.X.Equals(country.Coordinates.X)
                                                         && c.Coordinates.Y.Equals(country.Coordinates.Y));
 
-            if (incomingCountry.Any() == false)
+            if (incomingCountry == null)
             {
                 var newCountry = new CountryModel
                 {
@@ -75,7 +75,6 @@ namespace Santa_Project.Data
                 _countries.Add(newCountry);
                 WriteJson();
                 return newCountry;
-                //write to file
             }
             else
             {
@@ -92,7 +91,7 @@ namespace Santa_Project.Data
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            var countryToRemove = _countries.Where(c => c.Name.Equals(name)).First();
+            var countryToRemove = _countries.Find(c => c.Name.Equals(name));
            
             _countries.Remove(countryToRemove);
             var options = new JsonSerializerOptions { WriteIndented = true };
@@ -110,7 +109,7 @@ namespace Santa_Project.Data
                 throw new ArgumentException(nameof(name));
             }
 
-            var country = _countries.Where(c => c.Name.Equals(name)).First();
+            var country = _countries.Find(c => c.Name.Equals(name));
 
             return country.InitialPayload;
         }
