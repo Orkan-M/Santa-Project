@@ -14,7 +14,7 @@ namespace Santa_Project.Data
     public class JsonCountryRepository : IJsonCountryRepository
     {
         private readonly List<CountryModel> _countries;
-
+        const string fileName = @"..\Santa Project\Data\countries.json";
         public JsonCountryRepository()
         {
             _countries = LoadJson();
@@ -24,7 +24,7 @@ namespace Santa_Project.Data
         public virtual List<CountryModel> LoadJson()
         {
             //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
-            const string fileName = @"..\Santa Project\Data\countries.json";
+            
 
             var jsonString = File.ReadAllText(fileName);
 
@@ -34,7 +34,7 @@ namespace Santa_Project.Data
 
         public void WriteJson()
         {
-            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
+            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
 
             var options = new JsonSerializerOptions { WriteIndented = true };
 
