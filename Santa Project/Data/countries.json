@@ -1,53 +1,56 @@
 [
-    {
-        "Name": "Japan",
-        "Coordinates": {
-            "X": -14,
-            "Y": 8
-        },
-        "ForecastedWeather": "Foggy",
-        "InitialPayload": 6295
-    },
-    {
-        "Name": "China",
-        "Coordinates": {
-            "X": -10,
-            "Y": 19
-        },
-        "InitialPayload": 3756
-    },
-    {
-        "Name": "United Kingdom",
-        "Coordinates": {
-            "X": -12,
-            "Y": 11
-        },
-        "InitialPayload": 7452
-    },
-    {
-        "Name": "USA",
-        "Coordinates": {
-            "X": 6,
-            "Y": 3
-        },
-        "InitialPayload": 4851
-    },
-    {
-        "Name": "Germany",
-        "Coordinates": {
-            "X": 11,
-            "Y": 19
-        },
-        "ForecastedWeather": "Foggy",
-        "InitialPayload": 4658
-    },
-    {
-        "Name": "France",
-        "Coordinates": {
-            "X": 20,
-            "Y": 20
-        },
-        "ForecastedWeather": "Foggy",
-        "InitialPayload": 4214
+  {
+    "Name": "Japan",
+    "ForecastedWeather": "Foggy",
+    "InitialPayload": 6295,
+    "Coordinates": {
+      "X": -14,
+      "Y": 8
     }
+  },
+  {
+    "Name": "China",
+    "ForecastedWeather": null,
+    "InitialPayload": 3756,
+    "Coordinates": {
+      "X": -10,
+      "Y": 19
+    }
+  },
+  {
+    "Name": "United Kingdom",
+    "ForecastedWeather": null,
+    "InitialPayload": 7452,
+    "Coordinates": {
+      "X": -12,
+      "Y": 11
+    }
+  },
+  {
+    "Name": "USA",
+    "ForecastedWeather": null,
+    "InitialPayload": 4851,
+    "Coordinates": {
+      "X": 6,
+      "Y": 3
+    }
+  },
+  {
+    "Name": "Germany",
+    "ForecastedWeather": "Foggy",
+    "InitialPayload": 4658,
+    "Coordinates": {
+      "X": 11,
+      "Y": 19
+    }
+  },
+  {
+    "Name": "France",
+    "ForecastedWeather": "Foggy",
+    "InitialPayload": 4214,
+    "Coordinates": {
+      "X": 20,
+      "Y": 20
+    }
+  }
 ]
