@@ -62,7 +62,7 @@ namespace Santa_Project.Data
             var incomingCountry = _countries.Find(c => c.Name.Equals(country.Name) &&
                                                         c.Coordinates.X.Equals(country.Coordinates.X)
                                                         && c.Coordinates.Y.Equals(country.Coordinates.Y));
-
+            //TODO Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
             if (incomingCountry == null)
             {
                 var newCountry = new CountryModel

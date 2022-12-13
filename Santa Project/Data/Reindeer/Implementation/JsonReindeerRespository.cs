@@ -8,7 +8,7 @@ namespace Santa_Project.Data.Reindeer
     public class JsonReindeerRepository : IJsonReindeerRepository
     {
         private readonly List<ReindeerModel> _reindeer;
-
+        const string fileName = @"..\Santa Project\Data\reindeer.json";
         public JsonReindeerRepository()
         {
             _reindeer = LoadJson();
@@ -17,7 +17,7 @@ namespace Santa_Project.Data.Reindeer
 
         public virtual List<ReindeerModel> LoadJson()
         {
-            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
+            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
             //const string fileName = @"..\Santa-Project\Santa Project\Data\countries.json";
 
             var jsonString = File.ReadAllText(fileName);
@@ -28,7 +28,7 @@ namespace Santa_Project.Data.Reindeer
 
         public void WriteJson()
         {
-            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
+            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
 
             var options = new JsonSerializerOptions { WriteIndented = true };
 
