@@ -23,9 +23,6 @@ namespace Santa_Project.Data
 
         public virtual List<CountryModel> LoadJson()
         {
-            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
-            
-
             var jsonString = File.ReadAllText(fileName);
 
             var allCountries = JsonSerializer.Deserialize<List<CountryModel>>(jsonString);
@@ -34,8 +31,6 @@ namespace Santa_Project.Data
 
         public void WriteJson()
         {
-            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
-
             var options = new JsonSerializerOptions { WriteIndented = true };
 
             string countrySerialize = JsonSerializer.Serialize(_countries, options);
@@ -62,9 +57,22 @@ namespace Santa_Project.Data
             var incomingCountry = _countries.Find(c => c.Name.Equals(country.Name) &&
                                                         c.Coordinates.X.Equals(country.Coordinates.X)
                                                         && c.Coordinates.Y.Equals(country.Coordinates.Y));
-            //TODO Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
+            
             if (incomingCountry == null)
             {
+                
+                //Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
+                if (country.ForecastedWeather == "Foggy" || country.ForecastedWeather == null)
+                {
+                    country.ForecastedWeather = "Foggy";
+                }
+
+                else
+                {
+                    country.ForecastedWeather = "Clear";
+                }
+
+
                 var newCountry = new CountryModel
                 {
                     Name = country.Name,
