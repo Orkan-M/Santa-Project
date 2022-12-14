@@ -70,16 +70,13 @@ namespace Santa_Project.Data
             {
                 
                 //Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
-                if (country.ForecastedWeather == "Foggy" || country.ForecastedWeather == null)
+                if (country.ForecastedWeather != "Foggy")
+                {
+                    country.ForecastedWeather = "Clear";
+                } else
                 {
                     country.ForecastedWeather = "Foggy";
                 }
-
-                else
-                {
-                    country.ForecastedWeather = "Clear";
-                }
-
 
                 var newCountry = new CountryModel
                 {
