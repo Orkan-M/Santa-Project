@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Santa_Project.Data.Reindeer;
 using Santa_Project.Models;
-using Santa_Project.Models.Reindeer;
 
 namespace Santa_Project.Controllers.Reindeer
 {

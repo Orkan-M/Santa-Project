@@ -1,4 +1,4 @@
-﻿using Santa_Project.Models.Reindeer;
+﻿using Santa_Project.Models;
 
 namespace Santa_Project.Data.Reindeer
 {

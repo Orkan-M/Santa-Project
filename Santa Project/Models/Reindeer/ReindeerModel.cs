@@ -1,4 +1,4 @@
-﻿namespace Santa_Project.Models.Reindeer
+﻿namespace Santa_Project.Models
 {
     public class ReindeerModel
     {

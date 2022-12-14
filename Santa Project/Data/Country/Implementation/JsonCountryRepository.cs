@@ -52,18 +52,26 @@ namespace Santa_Project.Data
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return _countries.FirstOrDefault(c => c.Name.Equals(name));
+            var country = _countries.FirstOrDefault(c => c.Name.Equals(name));
+            if (country == null)
+            {
+                throw new ArgumentException("No country with that name currently Exists");
+            }
+
+            return country;
         }
 
 
 
         public CountryModel AddCountry(CountryModel country)
         {
-            var incomingCountry = _countries.Find(c => c.Name.Equals(country.Name) &&
-                                                        c.Coordinates.X.Equals(country.Coordinates.X)
-                                                        && c.Coordinates.Y.Equals(country.Coordinates.Y));
+            var incomingCountryName = _countries.Find(c => c.Name.Equals(country.Name));
+            var incomingCountryCoords = _countries.Find(
+                c => c.Coordinates.X.Equals(country.Coordinates.X) &&
+                     c.Coordinates.Y.Equals(country.Coordinates.Y));
 
-            if (incomingCountry == null)
+
+            if (incomingCountryName == null && incomingCountryCoords == null)
             {
                 var newCountry = new CountryModel
                 {
@@ -76,12 +84,8 @@ namespace Santa_Project.Data
                 WriteJson();
                 return newCountry;
             }
-            else
-            {
-                throw new ArgumentException("Invalid country");
-            }
 
-
+            throw new ArgumentException("A country already exists with that name or at the given coordinates");
         }
 
         public void DeleteByName(string name)

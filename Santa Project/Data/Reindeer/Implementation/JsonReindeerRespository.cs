@@ -1,13 +1,13 @@
 ﻿// using Santa_Project.Data;
 using Santa_Project.Models;
 using System.Text.Json;
-using Santa_Project.Models.Reindeer;
 
 namespace Santa_Project.Data.Reindeer
 {
     public class JsonReindeerRepository : IJsonReindeerRepository
     {
         private readonly List<ReindeerModel> _reindeer;
+        const string fileName = @"..\Santa Project\Data\reindeer.json";
 
         public JsonReindeerRepository()
         {
@@ -17,23 +17,15 @@ namespace Santa_Project.Data.Reindeer
 
         public virtual List<ReindeerModel> LoadJson()
         {
-            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
-            //const string fileName = @"..\Santa-Project\Santa Project\Data\countries.json";
-
             var jsonString = File.ReadAllText(fileName);
-
             var allReindeer = JsonSerializer.Deserialize<List<ReindeerModel>>(jsonString);
             return allReindeer;
         }
 
         public void WriteJson()
         {
-            const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json";
-
             var options = new JsonSerializerOptions { WriteIndented = true };
-
             string countrySerialize = JsonSerializer.Serialize(_reindeer, options);
-
             File.WriteAllText(fileName, countrySerialize);
         }
 
@@ -66,13 +58,11 @@ namespace Santa_Project.Data.Reindeer
                 WriteJson();
                 return newReindeer;
             }
-
             throw new ArgumentException(nameof(reindeer), "A Reindeer with that name already exists");
         }
 
         public void RemoveReindeer(string reindeerName)
         {
-            // remove from list
             var reindeerToRemove = _reindeer.Find(r => r.Name.Equals(reindeerName));
             _reindeer.Remove(reindeerToRemove);
 
