@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Formats.Asn1;
+using Microsoft.AspNetCore.Mvc;
 using Santa_Project.Models;
 using Santa_Project.Data.Country;
 
@@ -42,6 +43,16 @@ namespace Santa_Project.Controllers.Country
         {
             var countryResults = _countryRepository.GetCountryPayload(name);
             
+            //"Payload of the country," + name + ", is: " + countryResults
+            return Ok(countryResults);
+        }
+
+        [HttpPut]
+        [Route("UpdatePayload/{name} + {payload}")]
+        public async Task<ActionResult<CountryModel>> UpdatePayload(string name, uint payload)
+        {
+            var countryResults = _countryRepository.UpdatePayload(name, payload);
+
             //"Payload of the country," + name + ", is: " + countryResults
             return Ok(countryResults);
         }

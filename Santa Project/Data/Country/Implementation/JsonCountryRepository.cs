@@ -23,9 +23,6 @@ namespace Santa_Project.Data
 
         public virtual List<CountryModel> LoadJson()
         {
-            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
-            
-
             var jsonString = File.ReadAllText(fileName);
 
             var allCountries = JsonSerializer.Deserialize<List<CountryModel>>(jsonString);
@@ -34,8 +31,6 @@ namespace Santa_Project.Data
 
         public void WriteJson()
         {
-            //const string fileName = @"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\countries.json";
-
             var options = new JsonSerializerOptions { WriteIndented = true };
 
             string countrySerialize = JsonSerializer.Serialize(_countries, options);
@@ -73,6 +68,19 @@ namespace Santa_Project.Data
 
             if (incomingCountryName == null && incomingCountryCoords == null)
             {
+                
+                //Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
+                if (country.ForecastedWeather == "Foggy" || country.ForecastedWeather == null)
+                {
+                    country.ForecastedWeather = "Foggy";
+                }
+
+                else
+                {
+                    country.ForecastedWeather = "Clear";
+                }
+
+
                 var newCountry = new CountryModel
                 {
                     Name = country.Name,
@@ -106,7 +114,7 @@ namespace Santa_Project.Data
             File.WriteAllText(fileName, jsonString);
         }
 
-        public int GetCountryPayload(string name)
+        public uint GetCountryPayload(string name)
         {
             if (name == null)
             {
@@ -115,7 +123,24 @@ namespace Santa_Project.Data
 
             var country = _countries.Find(c => c.Name.Equals(name));
 
-            return country.InitialPayload;
+            //Casted to Uint
+            return (uint)country.InitialPayload;
+        }
+
+        public CountryModel UpdatePayload(string name, uint payload)
+        {
+            if (name == null || payload == null)
+            {
+                throw new ArgumentException(nameof(name));
+            }
+
+            var country = _countries.Find(c => c.Name.Equals(name));
+
+            country.InitialPayload = payload;
+
+            //Call the method to write to the JSON file.
+            WriteJson();
+            return country;
         }
     }
 }
