@@ -16,7 +16,7 @@ namespace Santa_Project.Data.Reindeer
 
     public class JsonReindeerProvider : IReindeerProvider
     {
-        public List<ReindeerModel> LoadJson() => JsonSerializer.Deserialize<List<ReindeerModel>>(@"C:\Users\TerryMills\source\repos\Santa-Project\Santa Project\Data\reindeer.json");
+        public List<ReindeerModel> LoadJson() => JsonSerializer.Deserialize<List<ReindeerModel>>(@"..\Santa-Project\Santa Project\Data\countries.json");
 
         public void WriteJson(List<ReindeerModel> reindeer) => File.WriteAllText(@"..\Santa-Project\Santa Project\Data\countries.json", JsonSerializer.Serialize(reindeer, new JsonSerializerOptions { WriteIndented = true }));
     }
