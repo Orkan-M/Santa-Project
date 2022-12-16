@@ -8,7 +8,7 @@ namespace Santa_Project.IOC.Reindeer
     {
         public static IServiceCollection AddReindeerServices(this IServiceCollection services)
         {
-            return services.AddSingleton<IJsonReindeerRepository, JsonReindeerRepository>();
+            return services.AddSingleton<IReindeerRepository, ReindeerRepository>().AddSingleton<IReindeerProvider, JsonReindeerProvider>();
         }
     }
 }
