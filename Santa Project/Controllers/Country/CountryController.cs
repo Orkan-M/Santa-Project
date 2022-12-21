@@ -56,6 +56,5 @@ namespace Santa_Project.Controllers.Country
             //"Payload of the country," + name + ", is: " + countryResults
             return Ok(countryResults);
         }
-
     }
 }
