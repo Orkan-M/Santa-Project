@@ -3,7 +3,7 @@
 using System.Runtime.InteropServices.ComTypes;
 using Santa_Project.Models;
 using System.Text.Json;
-using Santa_Project.Models.Reindeer;
+using Santa_Project.Models;
 using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Santa_Project.Data.Reindeer
@@ -21,7 +21,7 @@ namespace Santa_Project.Data.Reindeer
         public void WriteJson(List<ReindeerModel> reindeer) => File.WriteAllText(@"..\Santa-Project\Santa Project\Data\countries.json", JsonSerializer.Serialize(reindeer, new JsonSerializerOptions { WriteIndented = true }));
     }
 
-    public class ReindeerRepository : IReindeerRepository
+    public class ReindeerRepository : IJsonReindeerRepository
     {
         private readonly IReindeerProvider _reindeerProvider;
 

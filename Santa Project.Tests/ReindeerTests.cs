@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.RenderTree;
 using Moq;
 using Santa_Project.Data.Reindeer;
-using Santa_Project.Models.Reindeer;
+using Santa_Project.Models;
 
 namespace Santa_Project.Tests
 {

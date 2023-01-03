@@ -2,7 +2,7 @@
 
 namespace Santa_Project.Data.Reindeer
 {
-    public interface IReindeerRepository
+    public interface IJsonReindeerRepository
     {
         public ReindeerModel GetReindeerByName(string name);
 

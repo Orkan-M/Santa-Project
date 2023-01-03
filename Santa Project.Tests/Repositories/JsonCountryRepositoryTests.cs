@@ -155,7 +155,7 @@ namespace Santa_Project.Tests.Repositories
         }
 
         [Fact]
-        public void DeleteCountryByNameShouldDeleteTheCountryViaTheGivenNameCaseInsensitive() // FIX
+        public void DeleteCountryByNameShouldDeleteTheCountryViaTheGivenNameCaseInsensitive()
         {
             // arrange
             var countryToDelete = new CountryModel
