@@ -47,16 +47,9 @@ namespace Santa_Project.Data.Reindeer
 
             if (incomingReindeer == null)
             {
-                var newReindeer = new ReindeerModel
-                {
-                    Name = reindeer.Name,
-                    Capacity = reindeer.Capacity,
-                    Range = reindeer.Range,
-                    ShinyNose = reindeer.ShinyNose
-                };
-                _reindeer.Add(newReindeer);
+                _reindeer.Add(reindeer);
                 WriteJson();
-                return newReindeer;
+                return reindeer;
             }
             throw new ArgumentException(nameof(reindeer), "A Reindeer with that name already exists");
         }

@@ -8,9 +8,9 @@ namespace Santa_Project.Controllers.Reindeer
     [ApiController]
     public class ReindeerController : ControllerBase
     {
-        private readonly IJsonReindeerRepository _reindeerrepository;
+        private readonly IReindeerRepository _reindeerrepository;
 
-        public ReindeerController(IJsonReindeerRepository reindeerrepository)
+        public ReindeerController(IReindeerRepository reindeerrepository)
         {
             _reindeerrepository = reindeerrepository;
         }

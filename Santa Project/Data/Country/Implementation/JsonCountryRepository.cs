@@ -1,12 +1,6 @@
-﻿using System.Data.Common;
-using Santa_Project.Data.Country;
+﻿using Santa_Project.Data.Country;
 using Santa_Project.Models;
 using System.Text.Json;
-using System.Xml.XPath;
-using System.Linq;
-using static Santa_Project.Models.CountryModel;
-using System.Diagnostics.Metrics;
-using System.Xml.Linq;
 
 namespace Santa_Project.Data
 {
@@ -29,14 +23,13 @@ namespace Santa_Project.Data
             return allCountries;
         }
 
-        public void WriteJson()
+        public virtual void WriteJson()
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
 
             string countrySerialize = JsonSerializer.Serialize(_countries, options);
 
             File.WriteAllText(fileName, countrySerialize);
-
         }
 
 
@@ -56,43 +49,39 @@ namespace Santa_Project.Data
             return country;
         }
 
-
-
+        // need to add case checking
         public CountryModel AddCountry(CountryModel country)
         {
+            if (country.Name == null || country.Coordinates == null || country.InitialPayload == null)
+            {
+                throw new ArgumentException(nameof(country));
+            }
             var incomingCountryName = _countries.Find(c => c.Name.Equals(country.Name));
             var incomingCountryCoords = _countries.Find(
                 c => c.Coordinates.X.Equals(country.Coordinates.X) &&
                      c.Coordinates.Y.Equals(country.Coordinates.Y));
 
-
-            if (incomingCountryName == null && incomingCountryCoords == null)
+            if (incomingCountryName != null || incomingCountryCoords != null)
             {
-                
-                //Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
-                if (country.ForecastedWeather != "Foggy")
-                {
-                    country.ForecastedWeather = "Clear";
-                } else
-                {
-                    country.ForecastedWeather = "Foggy";
-                }
-
-                var newCountry = new CountryModel
-                {
-                    Name = country.Name,
-                    ForecastedWeather = country.ForecastedWeather,
-                    InitialPayload = country.InitialPayload,
-                    Coordinates = country.Coordinates
-                };
-                _countries.Add(newCountry);
-                WriteJson();
-                return newCountry;
+                throw new ArgumentException("A country already exists with that name or at the given coordinates");
             }
 
-            throw new ArgumentException("A country already exists with that name or at the given coordinates");
+            //Check if Forecasted Weather is == "Foggy" else set to default of "Clear"
+            if (country.ForecastedWeather != "Foggy")
+            {
+                country.ForecastedWeather = "Clear";
+            }
+            else
+            {
+                country.ForecastedWeather = "Foggy";
+            }
+            _countries.Add(country);
+            WriteJson();
+            return country;
+            
         }
 
+        // case checking
         public void DeleteByName(string name)
         {
             // remove from list
@@ -101,14 +90,12 @@ namespace Santa_Project.Data
                 throw new ArgumentNullException(nameof(name));
             }
             var countryToRemove = _countries.Find(c => c.Name.Equals(name));
-           
+
             _countries.Remove(countryToRemove);
             var options = new JsonSerializerOptions { WriteIndented = true };
 
             // remove from json file
-            const string fileName = @"../Santa Project/Data/countries.json";
-            string jsonString = JsonSerializer.Serialize(_countries, options);
-            File.WriteAllText(fileName, jsonString);
+            WriteJson();
         }
 
         public uint GetCountryPayload(string name)
