@@ -52,32 +52,5 @@
       "X": 20,
       "Y": 20
     }
-  },
-  {
-    "Name": "Test",
-    "ForecastedWeather": "Clear",
-    "InitialPayload": 4,
-    "Coordinates": {
-      "X": 1,
-      "Y": 5
-    }
-  },
-  {
-    "Name": "xyz",
-    "ForecastedWeather": "Clear",
-    "InitialPayload": 0,
-    "Coordinates": {
-      "X": 13,
-      "Y": 17
-    }
-  },
-  {
-    "Name": "xyz",
-    "ForecastedWeather": "Clear",
-    "InitialPayload": 0,
-    "Coordinates": {
-      "X": 17,
-      "Y": 17
-    }
   }
 ]
